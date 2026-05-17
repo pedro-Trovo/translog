@@ -19,4 +19,6 @@ public interface EntregaRepository extends JpaRepository<Entrega, Long> {
     List<Entrega> findByStatusAtualAndCriadoEmBetween(StatusEntrega status, LocalDateTime inicio, LocalDateTime fim);
 
     long countByStatusAtualAndCriadoEmBetween(StatusEntrega status, LocalDateTime inicio, LocalDateTime fim);
+
+    long countByCodigoRastreioStartingWith(String prefixo);
 }
