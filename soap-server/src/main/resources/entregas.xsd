@@ -1,0 +1,132 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://translog.com/entregas"
+           targetNamespace="http://translog.com/entregas"
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="statusEntrega">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COLETADO"/>
+            <xs:enumeration value="EM_TRANSITO"/>
+            <xs:enumeration value="SAIU_PARA_ENTREGA"/>
+            <xs:enumeration value="ENTREGUE"/>
+            <xs:enumeration value="TENTATIVA_FALHA"/>
+            <xs:enumeration value="CANCELADO"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="statusHistorico">
+        <xs:sequence>
+            <xs:element name="status" type="tns:statusEntrega"/>
+            <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+            <xs:element name="registradoEm" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="entrega">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="codigoRastreio" type="xs:string"/>
+            <xs:element name="remetenteNome" type="xs:string"/>
+            <xs:element name="remetenteCidade" type="xs:string"/>
+            <xs:element name="destinatarioNome" type="xs:string"/>
+            <xs:element name="destinatarioCidade" type="xs:string"/>
+            <xs:element name="destinatarioEndereco" type="xs:string"/>
+            <xs:element name="pesoKg" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="statusAtual" type="tns:statusEntrega"/>
+            <xs:element name="criadoEm" type="xs:dateTime"/>
+            <xs:element name="atualizadoEm" type="xs:dateTime"/>
+            <xs:element name="statusHistorico" type="tns:statusHistorico" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="criarEntregaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="remetenteNome" type="xs:string"/>
+                <xs:element name="remetenteCidade" type="xs:string"/>
+                <xs:element name="destinatarioNome" type="xs:string"/>
+                <xs:element name="destinatarioCidade" type="xs:string"/>
+                <xs:element name="destinatarioEndereco" type="xs:string"/>
+                <xs:element name="pesoKg" type="xs:decimal" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="criarEntregaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="entrega" type="tns:entrega"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rastrearEntregaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigoRastreio" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rastrearEntregaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="entrega" type="tns:entrega"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="atualizarStatusRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigoRastreio" type="xs:string"/>
+                <xs:element name="novoStatus" type="tns:statusEntrega"/>
+                <xs:element name="observacao" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="atualizarStatusResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="entrega" type="tns:entrega"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listarEntregasRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="dataInicio" type="xs:date" minOccurs="0"/>
+                <xs:element name="dataFim" type="xs:date" minOccurs="0"/>
+                <xs:element name="status" type="tns:statusEntrega" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listarEntregasResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="entregas" type="tns:entrega" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cancelarEntregaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigoRastreio" type="xs:string"/>
+                <xs:element name="motivo" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cancelarEntregaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="entrega" type="tns:entrega"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
