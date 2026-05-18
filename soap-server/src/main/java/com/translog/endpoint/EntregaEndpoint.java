@@ -4,6 +4,7 @@ import com.translog.entity.Entrega;
 import com.translog.entity.StatusEntrega;
 import com.translog.entity.StatusHistorico;
 import com.translog.service.EntregaService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -31,6 +32,7 @@ public class EntregaEndpoint {
 
     @PayloadRoot(namespace = NS, localPart = "criarEntregaRequest")
     @ResponsePayload
+    @Transactional
     public Element criarEntrega(@RequestPayload Element request) throws Exception {
         Document doc = newDocument();
         String[] v = extractText(request, "remetenteNome", "remetenteCidade",
@@ -46,6 +48,7 @@ public class EntregaEndpoint {
 
     @PayloadRoot(namespace = NS, localPart = "rastrearEntregaRequest")
     @ResponsePayload
+    @Transactional(readOnly = true)
     public Element rastrearEntrega(@RequestPayload Element request) throws Exception {
         Document doc = newDocument();
         String codigo = getText(request, "codigoRastreio");
@@ -57,6 +60,7 @@ public class EntregaEndpoint {
 
     @PayloadRoot(namespace = NS, localPart = "atualizarStatusRequest")
     @ResponsePayload
+    @Transactional
     public Element atualizarStatus(@RequestPayload Element request) throws Exception {
         Document doc = newDocument();
         String codigo = getText(request, "codigoRastreio");
@@ -70,6 +74,7 @@ public class EntregaEndpoint {
 
     @PayloadRoot(namespace = NS, localPart = "listarEntregasRequest")
     @ResponsePayload
+    @Transactional(readOnly = true)
     public Element listarEntregas(@RequestPayload Element request) throws Exception {
         Document doc = newDocument();
         String di = getText(request, "dataInicio");
@@ -88,6 +93,7 @@ public class EntregaEndpoint {
 
     @PayloadRoot(namespace = NS, localPart = "cancelarEntregaRequest")
     @ResponsePayload
+    @Transactional
     public Element cancelarEntrega(@RequestPayload Element request) throws Exception {
         Document doc = newDocument();
         String codigo = getText(request, "codigoRastreio");

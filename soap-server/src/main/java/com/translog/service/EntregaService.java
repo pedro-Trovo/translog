@@ -54,6 +54,7 @@ public class EntregaService {
         return entrega;
     }
 
+    @Transactional(readOnly = true)
     public Optional<Entrega> rastrearEntrega(String codigoRastreio) {
         return entregaRepository.findByCodigoRastreio(codigoRastreio);
     }
@@ -80,6 +81,7 @@ public class EntregaService {
         return Optional.of(entrega);
     }
 
+    @Transactional(readOnly = true)
     public List<Entrega> listarEntregas(LocalDate dataInicio, LocalDate dataFim, StatusEntrega status) {
         LocalDateTime inicio = dataInicio != null
                 ? dataInicio.atStartOfDay()
