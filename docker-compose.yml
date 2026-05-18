@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: translog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  soap-server:
+    build: ./soap-server
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/translog
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api-intermediaria:
+    build: ./api-intermediaria
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      SOAP_WSDL_URL: http://soap-server:8080/ws/entregas.wsdl
+      FRONTEND_URL: http://localhost:5173
+    depends_on:
+      soap-server:
+        condition: service_started
+
+volumes:
+  pgdata:

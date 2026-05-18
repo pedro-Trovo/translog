@@ -27,3 +27,6 @@ docker-data/
 
 # Logs
 *.log
+
+# Temp
+translog-prompt*.md
