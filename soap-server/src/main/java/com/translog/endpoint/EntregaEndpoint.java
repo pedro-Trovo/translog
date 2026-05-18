@@ -86,7 +86,9 @@ public class EntregaEndpoint {
                 st != null ? StatusEntrega.valueOf(st) : null);
         Element root = doc.createElementNS(NS, "listarEntregasResponse");
         for (Entrega e : entregas) {
-            root.appendChild(toXmlEntrega(doc, e));
+            Element xml = doc.createElementNS(NS, "entregas");
+            toXmlEntregaContent(doc, xml, e);
+            root.appendChild(xml);
         }
         return root;
     }
@@ -106,6 +108,11 @@ public class EntregaEndpoint {
 
     private Element toXmlEntrega(Document doc, Entrega e) {
         Element xml = doc.createElementNS(NS, "entrega");
+        toXmlEntregaContent(doc, xml, e);
+        return xml;
+    }
+
+    private void toXmlEntregaContent(Document doc, Element xml, Entrega e) {
         addChild(doc, xml, "id", String.valueOf(e.getId()));
         addChild(doc, xml, "codigoRastreio", e.getCodigoRastreio());
         addChild(doc, xml, "remetenteNome", e.getRemetenteNome());
@@ -126,7 +133,6 @@ public class EntregaEndpoint {
             addChild(doc, h, "registradoEm", sh.getRegistradoEm().format(DTF));
             xml.appendChild(h);
         }
-        return xml;
     }
 
     private void addChild(Document doc, Element parent, String tag, String value) {
