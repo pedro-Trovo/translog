@@ -9,21 +9,25 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
+      start_period: 10s
 
   soap-server:
     build: ./soap-server
     ports:
       - "8080:8080"
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--spider", "http://localhost:8080/ws/entregas.wsdl"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/ws/entregas.wsdl"]
       interval: 10s
       timeout: 5s
       retries: 15
+      start_period: 40s
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/translog
       SPRING_DATASOURCE_USERNAME: postgres
@@ -36,11 +40,11 @@ services:
     build: ./api-intermediaria
     ports:
       - "3001:3001"
-    restart: on-failure
+    restart: unless-stopped
     environment:
       PORT: 3001
       SOAP_WSDL_URL: http://soap-server:8080/ws/entregas.wsdl
-      FRONTEND_URL: http://localhost
+      FRONTEND_URL: http://localhost:80
     depends_on:
       soap-server:
         condition: service_healthy
@@ -49,6 +53,7 @@ services:
     build: ./frontend
     ports:
       - "80:80"
+    restart: unless-stopped
     depends_on:
       api-intermediaria:
         condition: service_started
