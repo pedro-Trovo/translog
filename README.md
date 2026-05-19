@@ -47,20 +47,33 @@ PostgreSQL
 
 <h2 align="center">Tecnologias</h2>
 
+Abaixo uma tabela com as tecnologias utilizadas em cada camada da aplicação:
+
 <table align="center">
   <tr>
     <th></th>
-    <th>Linguagens</th>
-    <th>Frameworks</th>
-    <th>Bibliotecas</th>
-    <th>Ferramentas</th>
+    <th>Frontend</th>
+    <th>API Rest</th>
+    <th>API SOAP</th>
+    <th>Infra</th>
   </tr>
 
   <tr>
-    <th>Frontend</th>
+    <th>Linguagens</th>
     <td>
       <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black"/></a>
     </td>
+    <td>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black"/></a>
+    </td>
+    <td>
+      <a href="https://www.java.com/"><img alt="Java" src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white"/></a>
+    </td>
+    <td>-</td>
+  </tr>
+
+  <tr>
+    <th>Frameworks</th>
     <td>
       <a href="https://react.dev/"><img alt="React" src="https://img.shields.io/badge/react-%2361DAFB.svg?style=for-the-badge&logo=react&logoColor=black"/></a>
       <a href="https://vitejs.dev/"><img alt="Vite" src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white"/></a>
@@ -68,52 +81,41 @@ PostgreSQL
       <a href="https://ui.shadcn.com/"><img alt="shadcn/ui" src="https://img.shields.io/badge/shadcn%2Fui-000000.svg?style=for-the-badge&logo=shadcnui&logoColor=white"/></a>
     </td>
     <td>
-      <a href="https://axios-http.com/"><img alt="Axios" src="https://img.shields.io/badge/axios-%235A29E4.svg?style=for-the-badge&logo=axios&logoColor=white"/></a>
-      <a href="https://echarts.apache.org/"><img alt="ECharts" src="https://img.shields.io/badge/echarts-%23AA344D.svg?style=for-the-badge&logo=apacheecharts&logoColor=white"/></a>
-      <a href="https://lucide.dev/"><img alt="Lucide" src="https://img.shields.io/badge/lucide-%23F56565.svg?style=for-the-badge&logo=lucide&logoColor=white"/></a>
-    </td>
-    <td>-</td>
-  </tr>
-
-  <tr>
-    <th>API Rest</th>
-    <td>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black"/></a>
-    </td>
-    <td>
       <a href="https://expressjs.com/"><img alt="Express" src="https://img.shields.io/badge/express-%23000000.svg?style=for-the-badge&logo=express&logoColor=white"/></a>
-    </td>
-    <td>
-      <a href="https://www.npmjs.com/package/soap"><img alt="soap" src="https://img.shields.io/badge/soap-009688.svg?style=for-the-badge"/></a>
-    </td>
-    <td>
-      <a href="https://swagger.io/"><img alt="Swagger" src="https://img.shields.io/badge/swagger-%2385EA2D.svg?style=for-the-badge&logo=swagger&logoColor=black"/></a>
-    </td>
-  </tr>
-
-  <tr>
-    <th>API SOAP</th>
-    <td>
-      <a href="https://www.java.com/"><img alt="Java" src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white"/></a>
     </td>
     <td>
       <a href="https://spring.io/projects/spring-boot"><img alt="Spring Boot" src="https://img.shields.io/badge/spring%20boot-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white"/></a>
       <a href="https://spring.io/projects/spring-ws"><img alt="Spring-WS" src="https://img.shields.io/badge/spring%20ws-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white"/></a>
     </td>
+    <td>-</td>
+  </tr>
+
+  <tr>
+    <th>Bibliotecas</th>
+    <td>
+      <a href="https://axios-http.com/"><img alt="Axios" src="https://img.shields.io/badge/axios-%235A29E4.svg?style=for-the-badge&logo=axios&logoColor=white"/></a>
+      <a href="https://echarts.apache.org/"><img alt="ECharts" src="https://img.shields.io/badge/echarts-%23AA344D.svg?style=for-the-badge&logo=apacheecharts&logoColor=white"/></a>
+      <a href="https://lucide.dev/"><img alt="Lucide" src="https://img.shields.io/badge/lucide-%23F56565.svg?style=for-the-badge&logo=lucide&logoColor=white"/></a>
+    </td>
+    <td>
+      <a href="https://www.npmjs.com/package/soap"><img alt="soap" src="https://img.shields.io/badge/soap-009688.svg?style=for-the-badge"/></a>
+    </td>
     <td>
       <a href="https://spring.io/projects/spring-data-jpa"><img alt="JPA" src="https://img.shields.io/badge/jpa-%236DB33F.svg?style=for-the-badge&logo=hibernate&logoColor=white"/></a>
       <a href="https://projectlombok.org/"><img alt="Lombok" src="https://img.shields.io/badge/lombok-%23BC4520.svg?style=for-the-badge"/></a>
     </td>
-    <td>
-      <a href="https://maven.apache.org/"><img alt="Maven" src="https://img.shields.io/badge/maven-%23C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white"/></a>
-    </td>
+    <td>-</td>
   </tr>
 
   <tr>
-    <th>Infra</th>
+    <th>Ferramentas</th>
     <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>
+      <a href="https://swagger.io/"><img alt="Swagger" src="https://img.shields.io/badge/swagger-%2385EA2D.svg?style=for-the-badge&logo=swagger&logoColor=black"/></a>
+    </td>
+    <td>
+      <a href="https://maven.apache.org/"><img alt="Maven" src="https://img.shields.io/badge/maven-%23C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white"/></a>
+    </td>
     <td>
       <a href="https://www.postgresql.org/"><img alt="PostgreSQL" src="https://img.shields.io/badge/postgresql-%234169E1.svg?style=for-the-badge&logo=postgresql&logoColor=white"/></a>
       <a href="https://www.docker.com/"><img alt="Docker" src="https://img.shields.io/badge/docker-%232496ED.svg?style=for-the-badge&logo=docker&logoColor=white"/></a>
