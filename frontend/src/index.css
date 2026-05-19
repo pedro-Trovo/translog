@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-midnight: #0F172A;
+  --color-slate-dark: #334155;
+  --color-cyan: #06B6D4;
+  --color-blue: #3B82F6;
+  --color-slate: #64748B;
+  --color-bg: #F8FAFC;
+  --color-border: #E2E8F0;
+  --color-white: #FFFFFF;
+  --color-text: #0F172A;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
