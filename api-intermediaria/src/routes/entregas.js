@@ -169,8 +169,8 @@ router.patch('/:codigo/status',
 
 /**
  * @swagger
- * /entregas/{codigo}:
- *   delete:
+ * /entregas/{codigo}/cancelar:
+ *   post:
  *     summary: Cancela uma entrega
  *     parameters:
  *       - in: path
@@ -193,7 +193,7 @@ router.patch('/:codigo/status',
  *       200:
  *         description: Entrega cancelada
  */
-router.delete('/:codigo',
+router.post('/:codigo/cancelar',
   validate({ motivo: { required: true } }),
   async (req, res) => {
     try {

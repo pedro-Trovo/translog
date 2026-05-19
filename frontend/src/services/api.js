@@ -25,6 +25,6 @@ export async function atualizarStatus(codigo, status, observacao = "") {
 }
 
 export async function cancelarEntrega(codigo, motivo) {
-  const { data } = await api.delete(`/entregas/${codigo}`, { data: { motivo } });
+  const { data } = await api.post(`/entregas/${codigo}/cancelar`, { motivo });
   return data;
 }
