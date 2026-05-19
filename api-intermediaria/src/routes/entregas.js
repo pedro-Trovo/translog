@@ -45,6 +45,29 @@ router.get('/', async (req, res) => {
 /**
  * @swagger
  * /entregas/{codigo}:
+ *   head:
+ *     summary: Verifica se uma entrega existe (sem corpo na resposta)
+ *     parameters:
+ *       - in: path
+ *         name: codigo
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Codigo de rastreio
+ *     responses:
+ *       200:
+ *         description: Entrega existe
+ *         headers:
+ *           X-Status-Atual:
+ *             schema:
+ *               type: string
+ *             description: Status atual da entrega
+ *           X-Ultima-Atualizacao:
+ *             schema:
+ *               type: string
+ *             description: Data da ultima atualizacao
+ *       404:
+ *         description: Entrega nao encontrada
  *   get:
  *     summary: Rastreia uma entrega pelo codigo
  *     parameters:
@@ -60,6 +83,20 @@ router.get('/', async (req, res) => {
  *       404:
  *         description: Entrega nao encontrada
  */
+router.head('/:codigo', async (req, res) => {
+  try {
+    const entrega = await soapService.rastrearEntrega(req.params.codigo);
+    if (!entrega) {
+      return res.status(404).end();
+    }
+    res.set('X-Status-Atual', entrega.statusAtual);
+    res.set('X-Ultima-Atualizacao', entrega.atualizadoEm || entrega.criadoEm);
+    res.status(200).end();
+  } catch (err) {
+    res.status(404).end();
+  }
+});
+
 router.get('/:codigo', async (req, res) => {
   try {
     const entrega = await soapService.rastrearEntrega(req.params.codigo);
