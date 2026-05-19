@@ -24,3 +24,12 @@ export function getStatusLabel(status) {
   const opt = STATUS_OPTIONS.find((s) => s.value === status);
   return opt ? opt.label : status;
 }
+
+export const TRANSICOES_VALIDAS = {
+  COLETADO: ["EM_TRANSITO", "CANCELADO"],
+  EM_TRANSITO: ["SAIU_PARA_ENTREGA", "CANCELADO"],
+  SAIU_PARA_ENTREGA: ["ENTREGUE", "TENTATIVA_FALHA", "CANCELADO"],
+  TENTATIVA_FALHA: ["SAIU_PARA_ENTREGA", "CANCELADO"],
+  ENTREGUE: [],
+  CANCELADO: [],
+};
