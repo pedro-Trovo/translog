@@ -3,6 +3,9 @@ import Header from "./components/Header";
 import SummaryCards from "./components/SummaryCards";
 import FilterBar from "./components/FilterBar";
 import EntregasTable from "./components/EntregasTable";
+import RastreioModal from "./components/RastreioModal";
+import NovaEntregaForm from "./components/NovaEntregaForm";
+import StatusChart from "./components/StatusChart";
 import { listarEntregas } from "./services/api";
 
 function getTodayRange() {
@@ -19,6 +22,8 @@ export default function App() {
   const [entregas, setEntregas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [selectedCodigo, setSelectedCodigo] = useState(null);
 
   const fetchEntregas = useCallback(async () => {
     setLoading(true);
@@ -53,7 +58,10 @@ export default function App() {
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        <FilterBar filtros={filtros} onFilterChange={setFiltros} />
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <FilterBar filtros={filtros} onFilterChange={setFiltros} />
+          <NovaEntregaForm onRefresh={fetchEntregas} />
+        </div>
 
         <SummaryCards entregas={filteredEntregas} />
 
@@ -70,8 +78,26 @@ export default function App() {
           </div>
         )}
 
-        {!loading && !error && <EntregasTable entregas={filteredEntregas} onSelect={() => {}} />}
+        {!loading && !error && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <EntregasTable
+                entregas={filteredEntregas}
+                onSelect={(entrega) => setSelectedCodigo(entrega.codigoRastreio)}
+              />
+            </div>
+            <div className="lg:col-span-1">
+              <StatusChart entregas={filteredEntregas} />
+            </div>
+          </div>
+        )}
       </main>
+
+      <RastreioModal
+        codigo={selectedCodigo}
+        onClose={() => setSelectedCodigo(null)}
+        onRefresh={fetchEntregas}
+      />
     </div>
   );
 }
