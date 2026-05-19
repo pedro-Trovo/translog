@@ -2,10 +2,31 @@ const soap = require('soap');
 
 let client = null;
 
+async function getClientWithRetry(retries = 3, delay = 5000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await soap.createClientAsync(process.env.SOAP_WSDL_URL);
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      await new Promise((r) => setTimeout(r, delay));
+    }
+  }
+}
+
 async function getClient() {
   if (client) return client;
-  client = await soap.createClientAsync(process.env.SOAP_WSDL_URL);
+  client = await getClientWithRetry();
   return client;
+}
+
+async function withClient(fn) {
+  try {
+    const c = await getClient();
+    return await fn(c);
+  } catch (err) {
+    client = null;
+    throw err;
+  }
 }
 
 function toCamelCase(str) {
@@ -60,46 +81,51 @@ function getListaFromResult(result) {
 }
 
 async function criarEntrega(dados) {
-  const c = await getClient();
-  const args = {
-    remetenteNome: dados.remetenteNome,
-    remetenteCidade: dados.remetenteCidade,
-    destinatarioNome: dados.destinatarioNome,
-    destinatarioCidade: dados.destinatarioCidade,
-    destinatarioEndereco: dados.destinatarioEndereco,
-    pesoKg: dados.pesoKg,
-  };
-  const [result] = await c.criarEntregaAsync(args);
-  return getEntregaFromResult(result);
+  return withClient(async (c) => {
+    const args = {
+      remetenteNome: dados.remetenteNome,
+      remetenteCidade: dados.remetenteCidade,
+      destinatarioNome: dados.destinatarioNome,
+      destinatarioCidade: dados.destinatarioCidade,
+      destinatarioEndereco: dados.destinatarioEndereco,
+      pesoKg: dados.pesoKg,
+    };
+    const [result] = await c.criarEntregaAsync(args);
+    return getEntregaFromResult(result);
+  });
 }
 
 async function rastrearEntrega(codigoRastreio) {
-  const c = await getClient();
-  const [result] = await c.rastrearEntregaAsync({ codigoRastreio });
-  return getEntregaFromResult(result);
+  return withClient(async (c) => {
+    const [result] = await c.rastrearEntregaAsync({ codigoRastreio });
+    return getEntregaFromResult(result);
+  });
 }
 
 async function atualizarStatus(codigoRastreio, novoStatus, observacao) {
-  const c = await getClient();
-  const args = { codigoRastreio, novoStatus, observacao: observacao || '' };
-  const [result] = await c.atualizarStatusAsync(args);
-  return getEntregaFromResult(result);
+  return withClient(async (c) => {
+    const args = { codigoRastreio, novoStatus, observacao: observacao || '' };
+    const [result] = await c.atualizarStatusAsync(args);
+    return getEntregaFromResult(result);
+  });
 }
 
 async function listarEntregas(filtros = {}) {
-  const c = await getClient();
-  const args = {};
-  if (filtros.dataInicio) args.dataInicio = filtros.dataInicio;
-  if (filtros.dataFim) args.dataFim = filtros.dataFim;
-  if (filtros.status) args.status = filtros.status;
-  const [result] = await c.listarEntregasAsync(args);
-  return getListaFromResult(result);
+  return withClient(async (c) => {
+    const args = {};
+    if (filtros.dataInicio) args.dataInicio = filtros.dataInicio;
+    if (filtros.dataFim) args.dataFim = filtros.dataFim;
+    if (filtros.status) args.status = filtros.status;
+    const [result] = await c.listarEntregasAsync(args);
+    return getListaFromResult(result);
+  });
 }
 
 async function cancelarEntrega(codigoRastreio, motivo) {
-  const c = await getClient();
-  const [result] = await c.cancelarEntregaAsync({ codigoRastreio, motivo });
-  return getEntregaFromResult(result);
+  return withClient(async (c) => {
+    const [result] = await c.cancelarEntregaAsync({ codigoRastreio, motivo });
+    return getEntregaFromResult(result);
+  });
 }
 
 module.exports = {
