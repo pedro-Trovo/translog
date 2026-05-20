@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="logo.svg" width="280" alt="TransLog">
+  <img src="frontend/public/logo.svg" width="280" alt="TransLog">
 </h1>
 
 <p align="center">

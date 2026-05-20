@@ -1,6 +1,6 @@
 <svg width="300" height="100" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="logoTitle logoDesc">
   <title id="logoTitle">Logo Translog</title>
-  <desc id="logoDesc">Logotipo da empresa de logística Translog com um ícone de rota global e texto em azul marinho.</desc>
+  <desc id="logoDesc">Logotipo da empresa de logística Translog com um ícone de rota global e texto em branco.</desc>
 
   <!-- Definição de Gradiente para dar profundidade e modernidade -->
   <defs>
@@ -47,7 +47,7 @@
           font-size="36" 
           font-weight="800" 
           letter-spacing="-1" 
-          fill="url(#mainGradient)">
+          fill="#FFFFFF">
       TRANSLOG
     </text>
     
@@ -56,7 +56,8 @@
           font-size="12" 
           font-weight="600" 
           letter-spacing="3" 
-          fill="#64748B" 
+          fill="#FFFFFF"
+          opacity="0.75"
           text-transform="uppercase">
       Global Solutions
     </text>
