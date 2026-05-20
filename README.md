@@ -223,6 +223,45 @@ COLETADO → EM_TRANSITO → SAIU_PARA_ENTREGA → ENTREGUE
 
 ---
 
+<h2 align="center">Imagens do Projeto</h2>
+
+<div align="center">
+  <img src="images/1-inicio.png" alt="Painel principal" width="700">
+  <p><em>Painel principal — cards de resumo e tabela de entregas</em></p>
+</div>
+
+<div align="center">
+  <img src="images/2-filtros por status.png" alt="Filtro por status" width="700">
+  <p><em>Filtragem de entregas por status</em></p>
+</div>
+
+<div align="center">
+  <img src="images/3-detalhes de um registro-aoclicaremumregistro.png" alt="Detalhes do registro" width="700">
+  <p><em>Timeline de rastreio com histórico completo de status</em></p>
+</div>
+
+<div align="center">
+  <img src="images/4-filtrar-por-data.png" alt="Filtro por data" width="700">
+  <p><em>Filtro por período com date picker</em></p>
+</div>
+
+<div align="center">
+  <img src="images/5-formularioparacriarentrega.png" alt="Criação de entrega" width="700">
+  <p><em>Formulário para criação de nova entrega</em></p>
+</div>
+
+<div align="center">
+  <img src="images/6-filtroporcodigo.png" alt="Busca por código" width="700">
+  <p><em>Busca por código de rastreio</em></p>
+</div>
+
+<div align="center">
+  <img src="images/7-atualizacaodepedidooucancelamento_forms.png" alt="Atualização e cancelamento" width="700">
+  <p><em>Atualização de status e cancelamento de pedido</em></p>
+</div>
+
+---
+
 <h2 align="center">Licença</h2>
 
 Este projeto está sob a licença <strong>MIT</strong>. Consulte o arquivo <a href="LICENSE"><code>LICENSE</code></a> para mais informações.
